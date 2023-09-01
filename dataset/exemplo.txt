@@ -1,0 +1,1 @@
+se você deseja ler o arquivo caractere por caractere, você pode usar a classe StreamReader em vez de File.ReadAllText(). Aqui está um exemplo de como ler um arquivo letra por letra em C#:
