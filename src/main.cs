@@ -11,6 +11,7 @@ namespace Interpreter
     static void Main()
     {
         Lexema lex = new Lexema();
+        string word = "";
         string Walkingfile = "./dataset/exemplo.txt";
 
         try
@@ -19,16 +20,52 @@ namespace Interpreter
             if (File.Exists(Walkingfile))
             {
                 // Open the file using StreamReader
-                using (StreamReader sr = new StreamReader(Walkingfile))
+                using (FileStream fileStream = new FileStream(Walkingfile,FileMode.Open,FileAccess.Read))
                 {
+                  using(StreamReader sr = new StreamReader(fileStream)){
+
                     int caractereLido;
+                    long startPosition = fileStream.Position;
+                    int counter = 0;
+                    int counter_aux = 0;
+                    int counter_for_free = 0;
+
                     while ((caractereLido = sr.Read()) != -1)
                     {
                         char caractere = (char)caractereLido;
-                        // Faça algo com o caractere, por exemplo, exibi-lo na tela
-                        Console.Write(caractere);
+                        if(caractere != ' ' && counter_for_free == 0)
+                        {
+                          counter++;
+                          word += caractere;
+                          counter_for_free = 0;
+                        }
+                        else{
+                      
+                          if(counter_for_free == 0){
+                            fileStream.Seek(startPosition, SeekOrigin.Begin);
+                            Console.WriteLine(word);
+                            word = "";
+                            while(counter_aux != (counter-1))
+                            {
+                              counter_aux++;
+                              caractereLido = sr.Read();
+                              caractere = (char)caractereLido;
+                            }
+                            counter_aux = 0;
+                            Console.WriteLine(" ");
+                            Console.Write(caractere);
+                          }
+                          else{
+                            counter_for_free = 0;
+                          }
+                          counter_for_free ++;
+
+
+                         }
+                        // Console.Write(caractere);
                     }
-                }
+                  }
+               }
             }
             else
             {
