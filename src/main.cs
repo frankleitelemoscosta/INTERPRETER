@@ -22,47 +22,27 @@ namespace Interpreter
                 // Open the file using StreamReader
                 using (FileStream fileStream = new FileStream(Walkingfile,FileMode.Open,FileAccess.Read))
                 {
+
                   using(StreamReader sr = new StreamReader(fileStream)){
 
                     int caractereLido;
                     long startPosition = fileStream.Position;
-                    int counter = 0;
-                    int counter_aux = 0;
-                    int counter_for_free = 0;
 
                     while ((caractereLido = sr.Read()) != -1)
                     {
-                        char caractere = (char)caractereLido;
-                        if(caractere != ' ' && counter_for_free == 0)
+                        
+                        //if the readed caractere is 32 so the read file is in a space
+                        if(caractereLido != 32)
                         {
-                          counter++;
-                          word += caractere;
-                          counter_for_free = 0;
+                          word +=(char)caractereLido;
                         }
-                        else{
-                      
-                          if(counter_for_free == 0){
-                            fileStream.Seek(startPosition, SeekOrigin.Begin);
-                            Console.WriteLine(word);
-                            word = "";
-                            while(counter_aux != (counter-1))
-                            {
-                              counter_aux++;
-                              caractereLido = sr.Read();
-                              caractere = (char)caractereLido;
-                            }
-                            counter_aux = 0;
-                            Console.WriteLine(" ");
-                            Console.Write(caractere);
-                          }
-                          else{
-                            counter_for_free = 0;
-                          }
-                          counter_for_free ++;
-
-
-                         }
-                        // Console.Write(caractere);
+                        else
+                        {
+                          Console.WriteLine(word);
+                          word = "";
+                          Console.WriteLine("");
+                        }
+                        
                     }
                   }
                }
