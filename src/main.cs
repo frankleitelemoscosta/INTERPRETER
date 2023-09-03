@@ -11,7 +11,6 @@ namespace Interpreter
     static void Main()
     {
         Lexema lex = new Lexema();
-        string word = "";
         string Walkingfile = "./dataset/exemplo.txt";
 
         try
@@ -27,11 +26,14 @@ namespace Interpreter
                     int counter = 0;
                     int aux_caracter;
 
+
+                    //in here before the read a file i add the check of the a struct have a ;, if yes construction the token and close this function
+
+                    //in here.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
+
                     while ((caractereLido = sr.Read()) != -1)
                     {
                         
-
-
                         //if the readed caractere is 32 so the read file is in a space or 10 if the value is \n end 59 if the value is ;
                         if(caractereLido == 59)
                         {
@@ -48,15 +50,19 @@ namespace Interpreter
                           if(47 < (int)lex.token[0] && (int)lex.token[0] < 57 )
                           {
                             Console.WriteLine("a err of write, begin with a number and after write a letter.");
-                            Console.Write("O primeiro caracter é: ");
-                            Console.Write(lex.token[0]);
                             return;
                           }
                         }
                         //if is a number:
                         else if(caractereLido >= 47 && caractereLido <= 57)
                         {
+                          if((int)lex.token[0] >= 47 && (int)lex.token)
+                          {
+                          
+                          }
+
                           lex.token += (char)caractereLido; 
+                          
                         }
 
                     }
