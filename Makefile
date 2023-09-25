@@ -9,3 +9,5 @@ clean:
 run: 
 
 	mono ./bin/executavel.exe
+
+c: clean all run 
