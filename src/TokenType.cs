@@ -1,5 +1,6 @@
 using System;
 
+namespace Enum{
 public enum TokenType
 {
     // Specials
@@ -128,4 +129,4 @@ public static class TokenTypeExtensions
         }
     }
 }
-
+}

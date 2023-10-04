@@ -1,6 +1,6 @@
 all: 
 
-	mcs ./src/main.cs ./src/Lexema.cs -out:./bin/executavel.exe
+	mcs ./src/main.cs ./src/Lexema.cs ./src/TokenType.cs ./src/SymbolTable.cs ./src/LexicalAnalysis.cs -out:./bin/executavel.exe
 
 clean: 
 
@@ -8,6 +8,6 @@ clean:
 
 run: 
 
-	mono ./bin/executavel.exe
+	mono ./bin/executavel.exe assign.tiny
 
 c: clean all run 
