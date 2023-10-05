@@ -57,7 +57,6 @@ public class SymbolTable
         {
             // Aqui você pode lançar uma exceção ou tomar outra ação apropriada
 			return TokenType.TT_VAR;
-		    //throw new KeyNotFoundException("Token não encontrado na tabela de símbolos.");
         }
     }
 

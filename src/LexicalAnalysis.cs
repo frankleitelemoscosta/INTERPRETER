@@ -7,37 +7,28 @@ namespace Interpreter
 public partial class LexicalAnalysis{
   public LexicalAnalysis()
   {}
-  public Lexema LexicalAnalysisAN(ref int Savecaractere,StreamReader file,ref bool check)
+  public Lexema LexicalAnalysisAN(ref int Savecaractere,StreamReader file,ref bool check,ref int aux_caracter, ref int counter, ref bool key,ref int aux2_caracter,ref int counter_aux)
   {
 	
 	Lexema lex = new Lexema();
 	SymbolTable symbols = new SymbolTable();
     
-	try
-	{
-	  int state = 1;
-	  int aux_caracter = 0;
-	  int caractereLido = 0;
+	int state = 1;
+	int caractereLido = 0;
+	
+		caractereLido = file.Read();
+	
+	
+	
+	
 		//in here before the read a file i add the check of the a struct have a ;, if yes construction the token and close this function
 
-	  while (state != 7 && state != 8)
-	  {
-	  if(Savecaractere != 15000)
-	  {
-			caractereLido = aux_caracter;
-			Savecaractere = 15000;//change for the standard number for in future changes not make problems
-	  }
-	  else{
-
-	    caractereLido = file.Read();
-		aux_caracter = caractereLido;
-	    
-
-		if(caractereLido == -1)
+	  while (state != 7 && state != 8){
+	  		if(caractereLido == -1)
 	    {
 	      check = true;
 	    }
-	  }
+	  
 		switch(state)
 		{
 		  case 1:	 
@@ -45,7 +36,6 @@ public partial class LexicalAnalysis{
 		    if(caractereLido == 10)
 		    { 
 		      //aux_caracter = caractereLido;
-		      //caractereLido = file.Read();
 		      state = 1;
 		    }else if(caractereLido == 32 || caractereLido == 9 || caractereLido == 13)
 		    {
@@ -91,7 +81,6 @@ public partial class LexicalAnalysis{
 		  case 2:
 		    if(caractereLido == 10)//aqui vou ter de pensar o que fazer pois é nesse ponto que se trata do token do ;
 		    {
-		      //caractereLido = file.Read();
 		      state = 1;
 		    }
 		    else if(caractereLido == -1)
@@ -109,12 +98,13 @@ public partial class LexicalAnalysis{
 		    {
 		      lex.token += (char)caractereLido;
 		      state = 7;
+			  Savecaractere = caractereLido;
 		    }
 		    else
 		    {
 		      if(caractereLido != -1)
 		      {
-				Savecaractere = caractereLido;//aqui é outro lugar onde vou ter de fazer alguma coisa
+				//aqui é outro lugar onde vou ter de fazer alguma coisa
 		      }
 		      state = 7;//this means that the loop will finish, and the caractere will be save.
 		    }
@@ -176,6 +166,32 @@ public partial class LexicalAnalysis{
 		    break;
 
 		}//end of switch case
+		if(Savecaractere != 15000)
+	  {
+			caractereLido = aux_caracter;
+			Savecaractere = 15000;//change for the standard number for in future changes not make problems
+			key = true;
+			counter = 1;
+	  }
+	  
+
+		aux_caracter = caractereLido;
+
+		if(key != true)
+		{
+	    	caractereLido = file.Read();	    
+		}else if(key == true && counter == 0)
+		{
+			caractereLido = aux2_caracter;
+			key = false;
+		}else
+		{
+			counter = 0;
+		}
+
+		if(key != true)aux2_caracter = caractereLido;
+
+
 
 	  }
 		  if(state == 7)
@@ -183,14 +199,11 @@ public partial class LexicalAnalysis{
 			lex.type = symbols.Find(lex.token);		//tenho de ver o que fazer com isso	
 		    }
 	   
-	   
+	return lex;   
 	}
-	catch (Exception ex)
-	{
-	    Console.WriteLine($"Ocorreu um erro: {ex.Message}");
-	}
+
  
-return lex;
+	
  }
 }
-}
+
