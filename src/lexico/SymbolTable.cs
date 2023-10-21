@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Enum;
 
-namespace Interpreter{
+namespace src.lexico
+{
 public class SymbolTable
 {
     public Dictionary<string, TokenType> m_symbols = new Dictionary<string, TokenType>();

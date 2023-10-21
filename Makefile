@@ -1,6 +1,6 @@
 all: 
 
-	mcs ./src/main.cs ./src/Lexema.cs ./src/TokenType.cs ./src/SymbolTable.cs ./src/LexicalAnalysis.cs -out:./bin/executavel.exe
+	mcs ./src/*.cs ./src/interpreter/command/*.cs ./src/interpreter/expr/*.cs ./src/interpreter/util/*.cs ./src/lexico/*.cs ./src/syntatic/*.cs -out:./bin/executavel.exe
 
 clean: 
 
