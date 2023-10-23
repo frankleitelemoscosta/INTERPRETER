@@ -8,6 +8,6 @@ clean:
 
 run: 
 
-	mono ./bin/executavel.exe assign.tiny
+	mono ./bin/executavel.exe ./examples/sum.tiny
 
 c: clean all run 

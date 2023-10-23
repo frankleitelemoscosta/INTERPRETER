@@ -19,13 +19,18 @@ namespace src.interpreter.expr
 
         public BinaryIntExpr(int line, IntExpr left, Opcao op, IntExpr right) : base(line){
             this.left = left;
-            //this.op = op;
+            this.op = op;
             this.right = right;
+            
         }
 
         public override int expr() {
+            Console.WriteLine("processando expressao");
             int v1 = left.expr();
             int v2 = right.expr();
+            Console.WriteLine(v1);
+            Console.WriteLine(v2);
+            Console.WriteLine(this.op);
 
             switch (this.op) {
                 case Opcao.ADD:

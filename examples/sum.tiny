@@ -1,0 +1,6 @@
+program
+  x = read;
+  y = read;
+  output x;
+  output y;
+  output x + y;

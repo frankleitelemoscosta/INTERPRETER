@@ -18,10 +18,10 @@ namespace src.interpreter.command
     public override void execute()
     {
         WhileCommand whi;
-        whi = (WhileCommand)this.cmds;
+        //whi = (WhileCommand)this.cmds;
 
         while (this.cond.expr())
-            whi.execute();
+            this.cmds.execute();
     }
 
 }

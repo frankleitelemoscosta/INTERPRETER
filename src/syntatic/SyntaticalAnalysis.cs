@@ -105,19 +105,19 @@ namespace src.syntatic
 
                 Opcao op;
                 switch(this.token_current.type) {
-                    case (TokenType)Opcao.ADD:
+                    case TokenType.TT_ADD:
                         op = Opcao.ADD;
                         break;
-                    case (TokenType)Opcao.SUB:
+                    case TokenType.TT_SUB:
                         op = Opcao.SUB;
                         break;
-                    case (TokenType)Opcao.MUL:
+                    case TokenType.TT_MUL:
                         op = Opcao.MUL;
                         break;
-                    case (TokenType)Opcao.DIV:
+                    case TokenType.TT_DIV:
                         op = Opcao.DIV;
                         break;
-                    case (TokenType)Opcao.MOD:
+                    case TokenType.TT_MOD:
                     default:
                         op = Opcao.MOD;
                         break;
@@ -155,6 +155,7 @@ namespace src.syntatic
 
         public BoolExpr procBoolExpr()
         {
+            
             if (this.token_current.type == TokenType.TT_FALSE)
             {
                 Advance();
@@ -164,7 +165,6 @@ namespace src.syntatic
             {
                 Advance();
                 return new ConstBoolExpr(this.token_current.counterLine, false);
-
             }
             else if (this.token_current.type == TokenType.TT_NOT)
             {
@@ -177,25 +177,27 @@ namespace src.syntatic
                 int line = this.token_current.counterLine;
                 IntExpr left = procIntTerm();
 
-            Op op = new Op();
+                Console.WriteLine(this.token_current.type);
+
+            Op op = Op.GREATER;
 
             switch (this.token_current.type) {
-                case (TokenType)Op.EQUAL:
+                case TokenType.TT_EQUAL:
                     op = Op.EQUAL;
                     break;
-                case (TokenType)Op.NOT_EQUAL:
+                case TokenType.TT_NOT_EQUAL:
                     op = Op.NOT_EQUAL;
                     break;
-                case (TokenType)Op.LOWER:
+                case TokenType.TT_LOWER:
                     op = Op.LOWER;
                     break;
-                case (TokenType)Op.LOWER_EQUAL:
+                case TokenType.TT_LOWER_EQUAL:
                     op = Op.LOWER_EQUAL;
                     break;
-                case (TokenType)Op.GREATER:
+                case TokenType.TT_GREATER:
                     op = Op.GREATER;
                     break;
-                case (TokenType)Op.GREATER_EQUAL:
+                case TokenType.TT_GREATER_EQUAL:
                     op = Op.GREATER_EQUAL;
                     break;
                 default:
@@ -204,8 +206,10 @@ namespace src.syntatic
             }
 
             Advance();
+            Console.WriteLine(this.token_current.type);
 
             IntExpr right = procIntTerm();
+
 
             return new SingleBoolExpr(line, left, op, right);
             }
