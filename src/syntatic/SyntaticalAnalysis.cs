@@ -99,7 +99,9 @@ namespace src.syntatic
                 this.token_current.type == TokenType.TT_SUB |
                 this.token_current.type == TokenType.TT_MUL |
                 this.token_current.type == TokenType.TT_DIV |
-                this.token_current.type == TokenType.TT_MOD)
+                this.token_current.type == TokenType.TT_MOD |
+                this.token_current.type == TokenType.TT_POT              
+                )
             {
                 int line = this.token_current.counterLine;
 
@@ -110,6 +112,10 @@ namespace src.syntatic
                         break;
                     case TokenType.TT_SUB:
                         op = Opcao.SUB;
+                        break;
+                    case TokenType.TT_POT:
+                        op = Opcao.POT;
+                        Console.WriteLine(op);
                         break;
                     case TokenType.TT_MUL:
                         op = Opcao.MUL;

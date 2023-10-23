@@ -26,6 +26,7 @@ public enum TokenType
     TT_MUL,           // *
     TT_DIV,           // /
     TT_MOD,           // %
+    TT_POT,           //^
 
     // Keywords
     TT_PROGRAM,       // program

@@ -65,7 +65,7 @@ namespace src.lexico
 							lex.token += lex.vet[lex.counter];
 							state = 4;
 						}
-						else if (lex.vet[lex.counter] == ';' || lex.vet[lex.counter] == '+' || lex.vet[lex.counter] == '-' || lex.vet[lex.counter] == '*' || lex.vet[lex.counter] == '/' || lex.vet[lex.counter] == '%')
+						else if (lex.vet[lex.counter] == ';' || lex.vet[lex.counter] == '+' || lex.vet[lex.counter] == '-' || lex.vet[lex.counter] == '*' || lex.vet[lex.counter] == '/' || lex.vet[lex.counter] == '%' || lex.vet[lex.counter] == '^')
 						{
 							lex.token += lex.vet[lex.counter];
 							state = 7;
@@ -167,7 +167,6 @@ namespace src.lexico
 			{
 				lex.type = symbols.Find(lex.token);     //tenho de ver o que fazer com isso	
 			}
-
 
 			return lex;
 		}

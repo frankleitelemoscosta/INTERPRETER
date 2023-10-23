@@ -7,7 +7,8 @@ namespace src.interpreter.expr
 			SUB,
 			MUL,
 			DIV,
-			MOD
+			MOD,
+            POT
 		};
     public class BinaryIntExpr : IntExpr{
 
@@ -28,15 +29,21 @@ namespace src.interpreter.expr
             Console.WriteLine("processando expressao");
             int v1 = left.expr();
             int v2 = right.expr();
-            Console.WriteLine(v1);
-            Console.WriteLine(v2);
-            Console.WriteLine(this.op);
+            int result = v1;
+            int i = 1;
 
             switch (this.op) {
                 case Opcao.ADD:
                     return v1 + v2;
                 case Opcao.SUB:
                     return v1 - v2;
+                case Opcao.POT:
+                    while(i < v2)
+                    {
+                        result = result * v1;
+                        i++;
+                    }
+                    return result;
                 case Opcao.MUL:
                     return v1 * v2;
                 case Opcao.DIV:
